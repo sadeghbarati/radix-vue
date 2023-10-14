@@ -9,7 +9,9 @@
     "src/**/*.vue"
   ],
   "exclude": [
-    "src/**/*.test.ts"
+    "src/**/*.test.ts",
+    "src/**/story",
+    "src/test"
   ],
   "compilerOptions": {
     "paths": {
@@ -24,10 +26,14 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "declaration": false,
+    "declaration": true,
+    "declarationDir": "./temp",
     "lib": ["esnext", "dom"],
     "baseUrl": ".",
     "skipLibCheck": true,
     "outDir": "dist"
+  },
+  "vueCompilerOptions": {
+    "skipTemplateCodegen": true
   }
 }

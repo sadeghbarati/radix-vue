@@ -2,7 +2,6 @@ import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import dts from 'vite-plugin-dts'
 
 const projectRootDir = resolve(__dirname)
 
@@ -11,11 +10,6 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
-    dts({
-      tsconfigPath: 'tsconfig.build.json',
-      cleanVueFileName: true,
-      exclude: ['src/test/**'],
-    }),
   ],
   resolve: {
     alias: {
@@ -27,6 +21,7 @@ export default defineConfig({
       name: 'radix-vue',
       fileName: 'index',
       entry: resolve(__dirname, 'src/index.ts'),
+      formats: ['cjs', 'es'],
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
@@ -35,16 +30,18 @@ export default defineConfig({
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps
-        globals: {
-          'vue': 'Vue',
-          '@floating-ui/vue': '@floating-ui/vue',
-        },
-        assetFileNames: (chunkInfo) => {
-          if (chunkInfo.name === 'style.css')
-            return 'index.css'
-          return chunkInfo.name as string
-        },
+        // globals: {
+        //   'vue': 'Vue',
+        //   '@floating-ui/vue': 'FloatingUIVue',
+        // },
+        // assetFileNames: (chunkInfo) => {
+        //   if (chunkInfo.name === 'style.css')
+        //     return 'index.css'
+        //   return chunkInfo.name as string
+        // },
       },
     },
+    minify: false,
+    sourcemap: true,
   },
 })

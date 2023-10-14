@@ -273,7 +273,7 @@ provide(SELECT_CONTENT_INJECTION_KEY, {
         :data-state="context?.open.value ? 'open' : 'closed'"
         :dir="context?.dir.value"
         :style="{
-          // flex layout so we can place the scroll buttons properly
+          // flex layout so we can place the scroll buttons properl
           display: 'flex',
           flexDirection: 'column',
           // reset the outline by default as the content MAY get focused
@@ -281,7 +281,7 @@ provide(SELECT_CONTENT_INJECTION_KEY, {
         }"
         @contextmenu.prevent
         @placed="isPositioned = true"
-        @keydown="handleKeyDown"
+        @keydown="(handleKeyDown as any)"
       >
         <slot />
       </component>
